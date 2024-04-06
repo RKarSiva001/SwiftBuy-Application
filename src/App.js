@@ -17,50 +17,33 @@ class App extends Component {
     cartList: [],
   }
 
-  //   TODO: Add your code for remove all cart items, increment cart item quantity, decrement cart item quantity, remove cart item
-
-  addCartItem = product => {
-    const {cartList} = this.state
-    // this.setState(prevState => ({cartList: [...prevState.cartList, product]}))
-    //   TODO: Update the code here to implement addCartItem
-    const findingBasedOnId = cartList.find(
-      eachCart => eachCart.id === product.id,
-    )
-    if (findingBasedOnId) {
-      this.setState(prevState => ({
-        cartList: prevState.cartList.map(each => {
-          if (findingBasedOnId.id === each.id) {
-            const quantityProduct = each.quantity + 1
-            return {...each, quantity: quantityProduct}
-          }
-          return each
-        }),
-      }))
-    } else {
-      this.setState(prevState => ({
-        cartList: [...prevState.cartList, product],
-      }))
-    }
+  removeAllCartItems = () => {
+    this.setState({cartList: []})
   }
 
-  removeCartItem = id => {
-    const {cartList} = this.state
-    const removing = cartList.filter(each => each.id !== id)
-    this.setState({cartList: removing})
+  incrementCartItemQuantity = id => {
+    this.setState(prevState => ({
+      cartList: prevState.cartList.map(eachCartItem => {
+        if (id === eachCartItem.id) {
+          const updatedQuantity = eachCartItem.quantity + 1
+          return {...eachCartItem, quantity: updatedQuantity}
+        }
+        return eachCartItem
+      }),
+    }))
   }
 
   decrementCartItemQuantity = id => {
     const {cartList} = this.state
-    const quantityDecreased = cartList.find(each => each.id === id)
-
-    if (quantityDecreased.quantity > 1) {
+    const productObject = cartList.find(eachCartItem => eachCartItem.id === id)
+    if (productObject.quantity > 1) {
       this.setState(prevState => ({
-        cartList: prevState.cartList.map(each => {
-          if (each.id === id) {
-            const decreasing = each.quantity - 1
-            return {...each, quantity: decreasing}
+        cartList: prevState.cartList.map(eachCartItem => {
+          if (id === eachCartItem.id) {
+            const updatedQuantity = eachCartItem.quantity - 1
+            return {...eachCartItem, quantity: updatedQuantity}
           }
-          return each
+          return eachCartItem
         }),
       }))
     } else {
@@ -68,37 +51,38 @@ class App extends Component {
     }
   }
 
-  incrementCartItemQuantity = id => {
-    this.setState(prevState => ({
-      cartList: prevState.cartList.map(each => {
-        if (each.id === id) {
-          const increaseQuantity = each.quantity + 1
-          return {...each, quantity: increaseQuantity}
-        }
-        return each
-      }),
-    }))
+  removeCartItem = id => {
+    const {cartList} = this.state
+    const updatedCartList = cartList.filter(
+      eachCartItem => eachCartItem.id !== id,
+    )
+
+    this.setState({cartList: updatedCartList})
   }
 
-  // incrementCartItemQuantity = id => {
-  //     const {cartList} = this.state
-  //     const cartItem = cartList.find(eachItem => eachItem.id === id)
-  //     const {quantity} = cartItem
-  //     console.log(quantity)
-  //     this.setState(prevState => ({quantity: prevState.quantity + 1}))
-  //     console.log(quantity)
-  //     // const filteredCartList = cartList.filter(eachItem => eachItem.id !== id)
-  //     // this.setState({cartList: filteredCartList})
-  //     // this.setState(prevState => ({cartList: [...prevState.cartList, product]}))
-  //   }
-  //   removeCartItem = id => {
-  //     const {cartList} = this.state
-  //     const filteredCartList = cartList.filter(eachItem => eachItem.id !== id)
-  //     this.setState({cartList: filteredCartList})
-  //   }
+  addCartItem = product => {
+    const {cartList} = this.state
+    const productObject = cartList.find(
+      eachCartItem => eachCartItem.id === product.id,
+    )
 
-  removeAllCartItems = () => {
-    this.setState({cartList: []})
+    if (productObject) {
+      this.setState(prevState => ({
+        cartList: prevState.cartList.map(eachCartItem => {
+          if (productObject.id === eachCartItem.id) {
+            const updatedQuantity = eachCartItem.quantity + product.quantity
+
+            return {...eachCartItem, quantity: updatedQuantity}
+          }
+
+          return eachCartItem
+        }),
+      }))
+    } else {
+      const updatedCartList = [...cartList, product]
+
+      this.setState({cartList: updatedCartList})
+    }
   }
 
   render() {
@@ -110,9 +94,9 @@ class App extends Component {
           cartList,
           addCartItem: this.addCartItem,
           removeCartItem: this.removeCartItem,
-          removeAllCartItems: this.removeAllCartItems,
           incrementCartItemQuantity: this.incrementCartItemQuantity,
           decrementCartItemQuantity: this.decrementCartItemQuantity,
+          removeAllCartItems: this.removeAllCartItems,
         }}
       >
         <Switch>
