@@ -2,68 +2,68 @@ import {Component} from 'react'
 import Loader from 'react-loader-spinner'
 import Cookies from 'js-cookie'
 
-import FiltersGroup from '../FiltersGroup'
+// import FiltersGroup from '../FiltersGroup'
 import ProductCard from '../ProductCard'
-import ProductsHeader from '../ProductsHeader'
+// import ProductsHeader from '../ProductsHeader'
 
 import './index.css'
 
-const categoryOptions = [
-  {
-    name: 'Clothing',
-    categoryId: '1',
-  },
-  {
-    name: 'Electronics',
-    categoryId: '2',
-  },
-  {
-    name: 'Appliances',
-    categoryId: '3',
-  },
-  {
-    name: 'Grocery',
-    categoryId: '4',
-  },
-  {
-    name: 'Toys',
-    categoryId: '5',
-  },
-]
+// const categoryOptions = [
+//   {
+//     name: 'Clothing',
+//     categoryId: '1',
+//   },
+//   {
+//     name: 'Electronics',
+//     categoryId: '2',
+//   },
+//   {
+//     name: 'Appliances',
+//     categoryId: '3',
+//   },
+//   {
+//     name: 'Grocery',
+//     categoryId: '4',
+//   },
+//   {
+//     name: 'Toys',
+//     categoryId: '5',
+//   },
+// ]
 
-const sortbyOptions = [
-  {
-    optionId: 'PRICE_HIGH',
-    displayText: 'Price (High-Low)',
-  },
-  {
-    optionId: 'PRICE_LOW',
-    displayText: 'Price (Low-High)',
-  },
-]
+// const sortbyOptions = [
+//   {
+//     optionId: 'PRICE_HIGH',
+//     displayText: 'Price (High-Low)',
+//   },
+//   {
+//     optionId: 'PRICE_LOW',
+//     displayText: 'Price (Low-High)',
+//   },
+// ]
 
-const ratingsList = [
-  {
-    ratingId: '4',
-    imageUrl:
-      'https://assets.ccbp.in/frontend/react-js/rating-four-stars-img.png',
-  },
-  {
-    ratingId: '3',
-    imageUrl:
-      'https://assets.ccbp.in/frontend/react-js/rating-three-stars-img.png',
-  },
-  {
-    ratingId: '2',
-    imageUrl:
-      'https://assets.ccbp.in/frontend/react-js/rating-two-stars-img.png',
-  },
-  {
-    ratingId: '1',
-    imageUrl:
-      'https://assets.ccbp.in/frontend/react-js/rating-one-star-img.png',
-  },
-]
+// const ratingsList = [
+//   {
+//     ratingId: '4',
+//     imageUrl:
+//       'https://assets.ccbp.in/frontend/react-js/rating-four-stars-img.png',
+//   },
+//   {
+//     ratingId: '3',
+//     imageUrl:
+//       'https://assets.ccbp.in/frontend/react-js/rating-three-stars-img.png',
+//   },
+//   {
+//     ratingId: '2',
+//     imageUrl:
+//       'https://assets.ccbp.in/frontend/react-js/rating-two-stars-img.png',
+//   },
+//   {
+//     ratingId: '1',
+//     imageUrl:
+//       'https://assets.ccbp.in/frontend/react-js/rating-one-star-img.png',
+//   },
+// ]
 
 const apiStatusConstants = {
   initial: 'INITIAL',
@@ -76,10 +76,10 @@ class AllProductsSection extends Component {
   state = {
     productsList: [],
     apiStatus: apiStatusConstants.initial,
-    activeOptionId: sortbyOptions[0].optionId,
-    activeCategoryId: '',
-    searchInput: '',
-    activeRatingId: '',
+    // activeOptionId: sortbyOptions[0].optionId,
+    // activeCategoryId: '',
+    // searchInput: '',
+    // activeRatingId: '',
   }
 
   componentDidMount() {
@@ -91,13 +91,13 @@ class AllProductsSection extends Component {
       apiStatus: apiStatusConstants.inProgress,
     })
     const jwtToken = Cookies.get('jwt_token')
-    const {
-      activeOptionId,
-      activeCategoryId,
-      searchInput,
-      activeRatingId,
-    } = this.state
-    const apiUrl = `https://apis.ccbp.in/products?sort_by=${activeOptionId}&category=${activeCategoryId}&title_search=${searchInput}&rating=${activeRatingId}`
+    // const {
+    //   activeOptionId,
+    //   activeCategoryId,
+    //   searchInput,
+    //   activeRatingId,
+    // } = this.state
+    const apiUrl = `https://apis.ccbp.in/products` // ?sort_by=${activeOptionId}&category=${activeCategoryId}&title_search=${searchInput}&rating=${activeRatingId}`
     const options = {
       headers: {
         Authorization: `Bearer ${jwtToken}`,
@@ -148,9 +148,9 @@ class AllProductsSection extends Component {
     </div>
   )
 
-  changeSortby = activeOptionId => {
-    this.setState({activeOptionId}, this.getProducts)
-  }
+  //   changeSortby = activeOptionId => {
+  //     this.setState({activeOptionId}, this.getProducts)
+  //   }
 
   renderProductsListView = () => {
     const {productsList, activeOptionId} = this.state
@@ -158,11 +158,11 @@ class AllProductsSection extends Component {
 
     return shouldShowProductsList ? (
       <div className="all-products-container">
-        <ProductsHeader
+        {/* <ProductsHeader
           activeOptionId={activeOptionId}
           sortbyOptions={sortbyOptions}
           changeSortby={this.changeSortby}
-        />
+        /> */}
         <ul className="products-list">
           {productsList.map(product => (
             <ProductCard productData={product} key={product.id} />
@@ -199,39 +199,39 @@ class AllProductsSection extends Component {
     }
   }
 
-  clearFilters = () => {
-    this.setState(
-      {
-        searchInput: '',
-        activeCategoryId: '',
-        activeRatingId: '',
-      },
-      this.getProducts,
-    )
-  }
+  //   clearFilters = () => {
+  //     this.setState(
+  //       {
+  //         searchInput: '',
+  //         activeCategoryId: '',
+  //         activeRatingId: '',
+  //       },
+  //       this.getProducts,
+  //     )
+  //   }
 
-  changeRating = activeRatingId => {
-    this.setState({activeRatingId}, this.getProducts)
-  }
+  //   changeRating = activeRatingId => {
+  //     this.setState({activeRatingId}, this.getProducts)
+  //   }
 
-  changeCategory = activeCategoryId => {
-    this.setState({activeCategoryId}, this.getProducts)
-  }
+  //   changeCategory = activeCategoryId => {
+  //     this.setState({activeCategoryId}, this.getProducts)
+  //   }
 
-  enterSearchInput = () => {
-    this.getProducts()
-  }
+  //   enterSearchInput = () => {
+  //     this.getProducts()
+  //   }
 
-  changeSearchInput = searchInput => {
-    this.setState({searchInput})
-  }
+  //   changeSearchInput = searchInput => {
+  //     this.setState({searchInput})
+  //   }
 
   render() {
-    const {activeCategoryId, searchInput, activeRatingId} = this.state
+    // const {activeCategoryId, searchInput, activeRatingId} = this.state
 
     return (
       <div className="all-products-section">
-        <FiltersGroup
+        {/* <FiltersGroup
           searchInput={searchInput}
           categoryOptions={categoryOptions}
           ratingsList={ratingsList}
@@ -242,7 +242,7 @@ class AllProductsSection extends Component {
           changeCategory={this.changeCategory}
           changeRating={this.changeRating}
           clearFilters={this.clearFilters}
-        />
+        /> */}
         {this.renderAllProducts()}
       </div>
     )

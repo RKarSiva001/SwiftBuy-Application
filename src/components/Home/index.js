@@ -1,6 +1,8 @@
 import {Link} from 'react-router-dom'
 import Header from '../Header'
 
+// import mainImage from '/src/assets/main-page-img.jpg'
+
 import './index.css'
 
 const Home = () => (
@@ -8,30 +10,46 @@ const Home = () => (
     <Header />
     <div className="home-container">
       <div className="home-content">
-        <h1 className="home-heading">Clothes That Get YOU Noticed</h1>
-        <img
-          src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-home-img.png"
-          alt="clothes that get you noticed"
+        {/* <img
+          src={mainImage}
+          alt="main-image"
           className="home-mobile-img"
-        />
+        /> */}
         <p className="home-description">
-          Fashion is part of the daily air and it does not quite help that it
-          changes all the time. Clothes have always been a marker of the era and
-          we are in a revolution. Your fashion makes you been seen and heard
-          that way you are. So, celebrate the seasons new and exciting fashion
-          in your own way.
+          At Swiftbuy, we understand that modern lifestyles demand efficiency
+          and ease, which is why we have curated a vast and diverse selection of
+          products spanning across multiple categories. Whether you are
+          searching for the latest fashion trends, cutting-edge electronics,
+          home essentials, or unique gifts, Swiftbuy has you covered.
         </p>
+        <br />
+        <p className="home-description">
+          Our intuitive and user-friendly interface ensures that navigating
+          through our extensive catalog is a breeze. With just a few clicks or
+          taps, you can explore countless options, compare prices, read reviews,
+          and make informed decisions—all from the comfort of your home or on
+          the go.
+        </p>
+        <br />
+        <p className="home-description">
+          Shopping with Swiftbuy is not just about convenience. it is also about
+          peace of mind. We prioritize the security of your transactions,
+          employing state-of-the-art encryption technologies to safeguard your
+          personal information and financial data. Your privacy and security are
+          our top priorities, allowing you to shop with confidence.
+        </p>
+        <br />
         <Link to="/products">
           <button type="button" className="shop-now-button">
             Shop Now
           </button>
         </Link>
       </div>
-      <img
-        src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-home-img.png"
+      {/* <img
+        src={mainImage}
         alt="clothes that get you noticed"
         className="home-desktop-img"
-      />
+      /> */}
     </div>
   </>
 )

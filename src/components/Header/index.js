@@ -1,6 +1,8 @@
 import {Link, withRouter} from 'react-router-dom'
 import Cookies from 'js-cookie'
 
+import logo from '../../assets/swift-buy-logo.jpg'
+
 import CartContext from '../../context/CartContext'
 
 import './index.css'
@@ -34,13 +36,8 @@ const Header = props => {
       <div className="nav-content">
         <div className="nav-bar-mobile-logo-container">
           <Link to="/">
-            <img
-              className="website-logo"
-              src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-logo-img.png"
-              alt="website logo"
-            />
+            <img className="website-logo" src={logo} alt="website logo" />
           </Link>
-
           <button
             type="button"
             className="nav-mobile-btn"
@@ -56,11 +53,7 @@ const Header = props => {
 
         <div className="nav-bar-large-container">
           <Link to="/">
-            <img
-              className="website-logo"
-              src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-logo-img.png"
-              alt="website logo"
-            />
+            <img className="website-logo" src={logo} alt="website logo" />
           </Link>
           <ul className="nav-menu">
             <li className="nav-menu-item">
